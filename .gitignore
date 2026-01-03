@@ -1,9 +1,40 @@
+# Dependencies
 node_modules/
-.env
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Production
+/build
+/client/build
+
+# Misc
 .DS_Store
-*.log
-dist/
-build/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Server
+server/uploads/*
+!server/uploads/.gitkeep
+server/.env
+
+# IDE
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
 

@@ -1,0 +1,157 @@
+.salary {
+  padding: 30px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.salary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.salary-header h1 {
+  font-size: 32px;
+  color: #111827;
+  margin: 0;
+}
+
+.salaries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.salary-card {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.salary-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.salary-card-header h3 {
+  font-size: 20px;
+  color: #111827;
+  margin: 0 0 4px 0;
+}
+
+.salary-card-header p {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.salary-details {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.salary-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.summary-item {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  padding: 24px;
+  color: white;
+}
+
+.summary-item label {
+  display: block;
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+
+.summary-item h2 {
+  font-size: 32px;
+  margin: 0;
+}
+
+.salary-breakdown {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.breakdown-section {
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.breakdown-section h3 {
+  font-size: 18px;
+  color: #111827;
+  margin: 0 0 16px 0;
+}
+
+.breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.breakdown-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background: white;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.breakdown-item span:first-child {
+  color: #6b7280;
+}
+
+.breakdown-item span:last-child {
+  color: #111827;
+  font-weight: 600;
+}
+
+.modal-content.large {
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.component-input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.component-input-group {
+  display: flex;
+  gap: 10px;
+}
+
+.component-input-group select {
+  flex: 0 0 120px;
+}
+
+.component-input-group input {
+  flex: 1;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6b7280;
+}
+

@@ -1,246 +1,258 @@
 # HRMS - Human Resource Management System
 
-A production-ready SaaS HRMS platform built with the MERN stack, featuring role-based access control, attendance tracking, leave management, and automated payroll processing.
+A complete, modern Human Resource Management System web application with role-based access control for Admin/HR Officers and Employees.
 
-## 🚀 Features
+## Features
 
-### Admin Features
-- **Dashboard**: Overview of employees, pending leaves, and attendance
-- **Employee Management**: Create, edit, and deactivate employee accounts
-- **Attendance View**: Monitor employee attendance with filtering options
-- **Leave Approval**: Approve or reject leave requests
-- **Payroll Management**: Generate and lock monthly payroll with automatic calculations
+### Authentication & Access Control
+- Login system with auto-generated Login IDs
+- Only Admin/HR can create employee accounts
+- Auto-generated temporary passwords for first login
+- Mandatory password change on first login
+- Login ID format: `<CompanyCode><EmployeeInitials><YearOfJoining><SerialNumber>`
 
-### Employee Features
-- **Dashboard**: Personal attendance summary, leave status, and salary preview
-- **Attendance**: Mark daily attendance (present, absent, half-day)
-- **Leave Management**: Apply for leave and track approval status
-- **Salary View**: View detailed salary breakdowns and history
-- **Profile Management**: Update personal information and upload profile images
+### Dashboard
+- Employee cards grid layout with profile pictures
+- Real-time attendance status indicators:
+  - 🟢 Green = Present
+  - ✈️ Blue = On Leave
+  - 🟡 Yellow = Absent
+- Clickable cards to view employee profiles
+- Top navigation with company logo, tabs, and profile dropdown
 
-## 🛠️ Tech Stack
+### My Profile Section
+- Tab-based layout: Resume, Private Info, Salary Info (Admin only), Security
+- Profile fields: Name, Company, Department, Manager, Email, Phone, DOB, Address, Nationality, Gender
+- Bank Details: Account Number, Bank Name, IFSC Code, PAN, UAN
+- Profile picture and resume upload
 
-### Frontend
-- **React 18** with Vite
-- **Redux Toolkit** for state management
-- **React Router** for navigation
-- **Tailwind CSS** for styling
-- **Axios** for API calls
+### Attendance Management
+**Employee View:**
+- Check-In / Check-Out buttons
+- Display check-in/out times
+- Work hours & extra hours calculation
+- Monthly attendance summary
+
+**Admin/HR View:**
+- Day-wise attendance list for all employees
+- Filter by date & employee
+- Used for payroll calculation
+- Missing attendance automatically reduces payable days
+
+### Salary Management (Admin Only)
+- Fixed wage structure
+- Monthly & yearly salary display
+- Salary components:
+  - Basic (percentage or fixed)
+  - HRA (percentage or fixed)
+  - Standard Allowance
+  - Performance Bonus
+  - Leave Travel Allowance
+  - Fixed Allowance
+- Automatic calculation when base wage changes
+- Deductions:
+  - Provident Fund (PF)
+  - Professional Tax
+- Total components validation (must not exceed base wage)
+
+### Time Off (Leave Management)
+**Leave Types:**
+- Paid Leave
+- Sick Leave
+- Unpaid Leave
+
+**Employee:**
+- Apply for leave with start/end dates, type, number of days
+- Upload attachments (medical certificates, etc.)
+- View leave status (Pending / Approved / Rejected)
+
+**Admin/HR:**
+- View all leave requests
+- Approve or Reject leave requests
+- Automatic leave balance updates
+
+## Tech Stack
 
 ### Backend
-- **Node.js** with Express.js
-- **MongoDB** with Mongoose
-- **JWT** for authentication (access + refresh tokens)
-- **Multer** + **Cloudinary** for file uploads
-- **Express Validator** for input validation
-- **Bcrypt** for password hashing
+- Node.js with Express.js
+- MongoDB with Mongoose
+- JWT for authentication
+- Multer for file uploads
+- bcryptjs for password hashing
 
-## 📋 Prerequisites
+### Frontend
+- React with TypeScript
+- React Router for navigation
+- Axios for API calls
+- React Icons for icons
+- Modern CSS with responsive design
 
-- Node.js (v18 or higher)
+## Installation
+
+### Prerequisites
+- Node.js (v14 or higher)
 - MongoDB (local or cloud instance)
-- Cloudinary account (for image uploads)
+- npm or yarn
 
-## 🔧 Installation
+### Setup Steps
 
-### Backend Setup
+1. **Install dependencies:**
+   ```bash
+   npm run install-all
+   ```
 
-1. Navigate to the backend directory:
+2. **Configure environment variables:**
+   - Create `server/.env` file (already created with defaults)
+   - Update MongoDB connection string if needed
+   - Change JWT secret for production
+
+3. **Start MongoDB:**
+   - Make sure MongoDB is running on `localhost:27017` or update the connection string
+
+4. **Run the application:**
+   ```bash
+   npm run dev
+   ```
+   This will start both the backend server (port 5000) and frontend (port 3000)
+
+5. **Access the application:**
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:5000
+
+## Project Structure
+
+```
+HRMS/
+├── server/
+│   ├── models/          # MongoDB models
+│   ├── routes/          # API routes
+│   ├── middleware/      # Auth middleware
+│   ├── utils/           # Utility functions
+│   ├── uploads/         # Uploaded files
+│   └── index.js         # Server entry point
+├── client/
+│   ├── src/
+│   │   ├── components/  # React components
+│   │   ├── pages/       # Page components
+│   │   ├── context/     # React context
+│   │   └── App.tsx      # Main app component
+│   └── public/          # Static files
+└── package.json         # Root package.json
+```
+
+## API Endpoints
+
+### Authentication
+- `POST /api/auth/login` - Login
+- `POST /api/auth/change-password` - Change password
+- `GET /api/auth/me` - Get current user
+- `POST /api/auth/create-employee` - Create employee (Admin/HR only)
+
+### Employees
+- `GET /api/employees` - Get all employees (Admin/HR) or own profile
+- `GET /api/employees/:id` - Get employee by ID
+- `PUT /api/employees/:id` - Update employee profile
+
+### Attendance
+- `POST /api/attendance/checkin` - Check in (Employee)
+- `POST /api/attendance/checkout` - Check out (Employee)
+- `GET /api/attendance/today` - Get today's attendance (Employee)
+- `GET /api/attendance/monthly` - Get monthly summary (Employee)
+- `GET /api/attendance/admin` - Get all attendance (Admin/HR)
+
+### Leaves
+- `POST /api/leaves` - Apply for leave (Employee)
+- `GET /api/leaves` - Get leaves
+- `GET /api/leaves/balance` - Get leave balance (Employee)
+- `PUT /api/leaves/:id/approve` - Approve leave (Admin/HR)
+- `PUT /api/leaves/:id/reject` - Reject leave (Admin/HR)
+
+### Salary
+- `GET /api/salary` - Get salary information
+- `GET /api/salary/:employeeId` - Get salary for employee
+- `POST /api/salary` - Create/update salary (Admin/HR)
+- `GET /api/salary/:employeeId/payroll` - Calculate payroll (Admin/HR)
+
+## Usage
+
+### Creating First Admin Account
+
+You can create the first admin account using the provided script:
+
 ```bash
-cd backend
+cd server
+npm run create-admin [LOGIN_ID] [EMAIL] [PASSWORD]
 ```
 
-2. Install dependencies:
+Example:
 ```bash
-npm install
+npm run create-admin ADMIN001 admin@company.com Admin@123
 ```
 
-3. Create a `.env` file in the backend directory:
-```env
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/hrms
-JWT_SECRET=your_super_secret_jwt_key_change_this_in_production
-JWT_REFRESH_SECRET=your_super_secret_refresh_key_change_this_in_production
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-```
+If no arguments are provided, it will use default values:
+- Login ID: ADMIN001
+- Email: admin@company.com
+- Password: Admin@123
 
-4. Start the backend server:
-```bash
-npm run dev
-```
+**Note:** Make sure MongoDB is running before executing this script.
 
-The backend will run on `http://localhost:5000`
-
-### Frontend Setup
-
-1. Navigate to the frontend directory:
-```bash
-cd frontend
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Create a `.env` file in the frontend directory (optional):
-```env
-VITE_API_URL=http://localhost:5000/api
-```
-
-4. Start the development server:
-```bash
-npm run dev
-```
-
-The frontend will run on `http://localhost:3000`
-
-## 🗄️ Database Setup
-
-1. Make sure MongoDB is running on your system
-2. The application will automatically create the database `hrms` on first connection
-3. Create your first admin user by using the API or MongoDB directly
-
-### Creating First Admin User
-
-You can create the first admin user using MongoDB shell or a tool like MongoDB Compass:
+Alternatively, you can manually create an admin account in MongoDB:
 
 ```javascript
-// In MongoDB shell or Compass
+// In MongoDB shell or client
 use hrms
 db.users.insertOne({
-  name: "Admin User",
-  email: "admin@hrms.com",
-  password: "$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyY5Y5Y5Y5Y5", // password: admin123
+  loginId: "ADMIN001",
+  email: "admin@company.com",
+  password: "$2a$10$...", // bcrypt hash of your password (use bcryptjs to hash)
   role: "admin",
-  department: "Administration",
-  isActive: true,
-  createdAt: new Date(),
-  updatedAt: new Date()
+  isFirstLogin: false
 })
 ```
 
-**Note**: The password above is hashed for "admin123". For production, use a proper password hashing tool.
+### Creating Employee Accounts
 
-## 🔐 Authentication
+1. Login as Admin/HR
+2. Navigate to Dashboard
+3. Click "Create Employee" (if available) or go to `/create-employee`
+4. Fill in employee details
+5. System will auto-generate Login ID and temporary password
+6. Share credentials with employee
 
-- **Login**: POST `/api/auth/login`
-- **Get Current User**: GET `/api/auth/me`
-- **Refresh Token**: POST `/api/auth/refresh`
-- **Logout**: POST `/api/auth/logout`
+## Development
 
-After login, users are redirected based on their role:
-- **Admin** → `/admin/dashboard`
-- **Employee** → `/employee/dashboard`
-
-## 📡 API Endpoints
-
-### Admin Routes (Requires Admin Role)
-- `POST /api/admin/create-user` - Create new user
-- `GET /api/admin/employees` - Get all employees
-- `GET /api/admin/employees/:id` - Get single employee
-- `PUT /api/admin/employees/:id` - Update employee
-- `DELETE /api/admin/employees/:id` - Deactivate employee
-- `GET /api/admin/dashboard` - Get dashboard stats
-
-### Attendance Routes
-- `POST /api/attendance/mark` - Mark attendance (Employee only)
-- `GET /api/attendance` - Get attendance records
-- `GET /api/attendance/stats` - Get attendance statistics
-
-### Leave Routes
-- `POST /api/leave/apply` - Apply for leave (Employee only)
-- `GET /api/leave` - Get leave records
-- `PUT /api/leave/approve/:id` - Approve/reject leave (Admin only)
-- `GET /api/leave/stats` - Get leave statistics
-
-### Payroll Routes
-- `POST /api/payroll/generate` - Generate payroll (Admin only)
-- `GET /api/payroll` - Get payroll records
-- `GET /api/payroll/:id` - Get single payroll
-- `PUT /api/payroll/lock/:id` - Lock payroll (Admin only)
-
-### User Routes
-- `GET /api/user/profile` - Get own profile
-- `PUT /api/user/profile` - Update own profile
-- `POST /api/user/profile/image` - Upload profile image
-
-## 🚢 Deployment
-
-### Backend (Render/Railway)
-
-1. Push your code to GitHub
-2. Connect your repository to Render or Railway
-3. Set environment variables in the platform
-4. Deploy
-
-### Frontend (Vercel)
-
-1. Install Vercel CLI:
+### Running in Development Mode
 ```bash
-npm i -g vercel
+npm run dev
 ```
 
-2. Navigate to frontend directory:
+### Running Backend Only
 ```bash
-cd frontend
+npm run server
 ```
 
-3. Deploy:
+### Running Frontend Only
 ```bash
-vercel
+npm run client
 ```
 
-4. Set environment variable `VITE_API_URL` to your backend URL
+## Production Deployment
 
-## 🔒 Security Features
+1. Build the frontend:
+   ```bash
+   cd client
+   npm run build
+   ```
 
-- JWT-based authentication with refresh tokens
-- Role-based access control
-- Password hashing with bcrypt
-- Input validation with express-validator
-- Protected routes with middleware
-- CORS configuration
+2. Set production environment variables
+3. Use a process manager like PM2 for Node.js
+4. Configure reverse proxy (nginx) for serving static files and API
 
-## 📝 Business Logic
+## License
 
-### Attendance
-- Employees can mark attendance once per day
-- Attendance affects salary calculations
-- Admin can view but not modify attendance
+This project is open source and available for use.
 
-### Leave Management
-- Employees apply for leave with type, dates, and reason
-- Admin approves or rejects leave requests
-- Approved leaves automatically mark attendance as absent
+## Support
 
-### Payroll
-- Admin generates payroll for each employee per month
-- Payroll calculates based on:
-  - Basic salary
-  - Allowances
-  - Deductions (based on attendance)
-- Once locked, payroll cannot be modified
-
-## 🤝 Contributing
-
-This is a production-ready SaaS application. For contributions:
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-## 📄 License
-
-This project is proprietary software.
-
-## 🆘 Support
-
-For issues or questions, please contact the development team.
-
----
-
-**Built with ❤️ for modern HR management**
+For issues or questions, please check the code comments or create an issue in the repository.
 

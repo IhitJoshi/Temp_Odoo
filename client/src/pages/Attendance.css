@@ -1,0 +1,265 @@
+.attendance {
+  padding: 30px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.attendance-header h1 {
+  font-size: 32px;
+  color: #111827;
+  margin: 0 0 30px 0;
+}
+
+.attendance-filters {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-group label {
+  font-weight: 500;
+  color: #374151;
+  font-size: 14px;
+}
+
+.filter-group input,
+.filter-group select {
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.attendance-table-container {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+.attendance-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.attendance-table thead {
+  background-color: #f9fafb;
+}
+
+.attendance-table th {
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  font-size: 14px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.attendance-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.attendance-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.employee-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.employee-avatar-small {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.employee-avatar-small.placeholder {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+}
+
+.employee-name {
+  font-weight: 500;
+  color: #111827;
+}
+
+.employee-dept {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badge-success {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.badge-warning {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.badge-info {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.attendance-card {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.check-in-out h2 {
+  font-size: 24px;
+  color: #111827;
+  margin: 0 0 20px 0;
+}
+
+.attendance-status {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-item .icon {
+  font-size: 24px;
+}
+
+.status-item .icon.success {
+  color: #10b981;
+}
+
+.status-item .icon.error {
+  color: #ef4444;
+}
+
+.status-label {
+  font-weight: 500;
+  color: #374151;
+  font-size: 14px;
+}
+
+.status-time {
+  font-size: 18px;
+  color: #111827;
+  font-weight: 600;
+}
+
+.attendance-actions {
+  margin-bottom: 20px;
+}
+
+.completed-message {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #10b981;
+  font-weight: 500;
+}
+
+.work-hours {
+  display: flex;
+  gap: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.work-hours-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.work-hours-item label {
+  font-size: 12px;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.work-hours-item span {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.monthly-summary {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.monthly-summary h2 {
+  font-size: 24px;
+  color: #111827;
+  margin: 0 0 20px 0;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.summary-card {
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.summary-card label {
+  display: block;
+  font-size: 12px;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.summary-card h3 {
+  font-size: 28px;
+  color: #111827;
+  margin: 0;
+}
+
+.loading,
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #6b7280;
+}
+
